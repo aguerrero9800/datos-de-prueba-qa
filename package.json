@@ -1,0 +1,35 @@
+{
+  "name": "datos-de-prueba-qa",
+  "version": "1.0.0",
+  "description": "Generador reutilizable de datos de prueba para QA — soporta AR, CL, MX, HN, GT, EC, SV, CR",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "compilar": "tsc",
+    "compilar:vigilar": "tsc --watch",
+    "limpiar": "rimraf dist",
+    "construir": "npm run limpiar && npm run compilar",
+    "ejemplo": "ts-node -e \"const { crearCliente } = require('./src/index'); console.log(JSON.stringify(crearCliente('AR', { tipoEntidad: 'persona' }), null, 2))\"",
+    "ejemplo:argentina": "ts-node ejemplos/consola/generar-cliente-argentina.ts",
+    "ejemplo:mexico": "ts-node ejemplos/consola/generar-cliente-mexico.ts",
+    "ejemplo:chile": "ts-node ejemplos/consola/generar-cliente-chile.ts"
+  },
+  "keywords": [
+    "qa",
+    "datos-prueba",
+    "generador",
+    "testing",
+    "latam",
+    "latinoamerica"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/pdfkit": "^0.17.6",
+    "pdfkit": "^0.19.0",
+    "rimraf": "^5.0.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}

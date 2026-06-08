@@ -1,0 +1,63 @@
+{
+  "info": {
+    "name": "Datos de Prueba QA — Ejemplos",
+    "_postman_id": "datos-prueba-qa-v1",
+    "description": "Colección de ejemplos para usar datos generados con datos-de-prueba-qa.\n\nAntes de usar: ejecutar el generador y copiar los valores en las variables de entorno, o usar un pre-request script con ts-node.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.tu-aplicacion.ejemplo.com", "type": "string" },
+    { "key": "clienteNombre", "value": "María", "type": "string" },
+    { "key": "clienteApellido", "value": "García", "type": "string" },
+    { "key": "clienteEmail", "value": "maria.garcia42@ejemplo.com", "type": "string" },
+    { "key": "clienteDocumentoTipo", "value": "DNI", "type": "string" },
+    { "key": "clienteDocumentoNumero", "value": "28456789", "type": "string" },
+    { "key": "clienteTelefono", "value": "+54 11 56789012", "type": "string" },
+    { "key": "clientePais", "value": "AR", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Clientes",
+      "item": [
+        {
+          "name": "Crear cliente — persona natural (AR)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"{{clienteNombre}}\",\n  \"apellido\": \"{{clienteApellido}}\",\n  \"email\": \"{{clienteEmail}}\",\n  \"documento\": {\n    \"tipo\": \"{{clienteDocumentoTipo}}\",\n    \"numero\": \"{{clienteDocumentoNumero}}\"\n  },\n  \"telefono\": \"{{clienteTelefono}}\",\n  \"pais\": \"{{clientePais}}\",\n  \"tipoEntidad\": \"persona\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/clientes",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "clientes"]
+            }
+          }
+        },
+        {
+          "name": "Crear cliente — empresa (CL)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"razonSocial\": \"Soluciones Digitales SpA\",\n  \"email\": \"contacto@solucionesdigitales77.ejemplo.com\",\n  \"documento\": {\n    \"tipo\": \"RUT\",\n    \"numero\": \"76.543.210-K\"\n  },\n  \"telefono\": \"+56 2 56789012\",\n  \"pais\": \"CL\",\n  \"tipoEntidad\": \"empresa\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/clientes",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "clientes"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
