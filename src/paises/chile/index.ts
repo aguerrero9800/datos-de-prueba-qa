@@ -13,6 +13,20 @@ const CALLES = ['Av. Providencia', 'Av. Apoquindo', 'Av. Libertador Bernardo O\'
 const REGIONES = ['Metropolitana', 'Valparaíso', 'Biobío', 'Coquimbo', 'Antofagasta'];
 const AREAS = ['2', '32', '41', '51', '55'];
 
+function calcularDV(num: number): string {
+  const s = String(num);
+  let suma = 0;
+  let factor = 2;
+  for (let i = s.length - 1; i >= 0; i--) {
+    suma += parseInt(s[i]) * factor;
+    factor = factor === 7 ? 2 : factor + 1;
+  }
+  const dv = 11 - (suma % 11);
+  if (dv === 11) return '0';
+  if (dv === 10) return 'K';
+  return String(dv);
+}
+
 function formatearRut(num: number, dv: string): string {
   const s = String(num);
   const grupos: string[] = [];
@@ -22,12 +36,10 @@ function formatearRut(num: number, dv: string): string {
   return `${grupos.join('.')}-${dv}`;
 }
 
-// TODO: Reemplazar dígito verificador con el algoritmo Módulo 11 real
-// TODO: Usar rangos de RUT vigentes (personas: 5.000.000 a 26.000.000, empresas: 60.000.000 a 99.999.999)
 export function generarDocumento(tipoEntidad: TipoEntidad): DocumentoDato {
   const [min, max] = tipoEntidad === 'persona' ? [5000000, 25999999] : [60000000, 99999999];
   const num = enteroAleatorio(min, max);
-  const dv = elegir(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'K']);
+  const dv = calcularDV(num);
   return {
     tipo: 'RUT',
     numero: formatearRut(num, dv),
